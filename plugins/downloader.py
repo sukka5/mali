@@ -12,7 +12,7 @@ from datetime import datetime
 from config import Config
 
 from plugins.utitities import get_duration, get_width_height
-
+from plugins.screenshot import take_screen_shot
 from Translation import Translation
 from plugins.random import random_char
 from plugins.progress import progress_for_pyrogram, humanbytes
@@ -149,6 +149,7 @@ async def youtube_dl_call_back(bot, update):
             
             # ref: message from @Sources_codes
             start_time = time.time()
+            thumb = await take_screen_shot(download_directory, tmp_directory_for_each_user)
             width, height = get_width_height(download_directory)
             duration = get_duration(download_directory)
             await update.message.reply_video(
@@ -158,7 +159,7 @@ async def youtube_dl_call_back(bot, update):
                 duration=duration,
                 width=width,
                 height=height,
-                thumb=None,
+                thumb=thumb,
                 supports_streaming=True,
                     # reply_to_message_id=update.id,
                 progress=progress_for_pyrogram,
