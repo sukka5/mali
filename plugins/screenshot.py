@@ -1,6 +1,14 @@
-import os
+# the logging things
+import logging
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 import asyncio
+import os
 import time
+from hachoir.metadata import extractMetadata
+from hachoir.parser import createParser
 
 # Take screenshot function
 async def take_screen_shot(video_file, output_directory):
